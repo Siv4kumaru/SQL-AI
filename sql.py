@@ -82,11 +82,11 @@ def fetchtable(sql,table):
     cursor=conn.cursor()
     cursor.execute(sql)
     if "SELECT" not in (sql).upper():
+        conn.commit()
         st.success("Query executed successfully!")
         return
     data=cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
-    
     conn.close()
     df=pd.DataFrame(data,columns=column_names)
     st.write(df)
