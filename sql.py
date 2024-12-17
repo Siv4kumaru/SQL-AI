@@ -82,7 +82,7 @@ def fetchtable(sql,table):
     cursor=conn.cursor()
     cursor.execute(sql)
     if "SELECT" not in (sql).upper():
-        st.sucess("Query executed successfully!")
+        st.success("Query executed successfully!")
         return
     data=cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
