@@ -81,6 +81,9 @@ def fetchtable(sql,table):
     conn=sqlite3.connect('test.db')
     cursor=conn.cursor()
     cursor.execute(sql)
+    if "SELECT" not in (sql).upper():
+        st.sucess("Query executed successfully!")
+        return
     data=cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
     
