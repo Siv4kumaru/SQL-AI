@@ -2,6 +2,7 @@ import streamlit as st
 import sqlite3
 from langchain_groq import ChatGroq
 import os
+import time
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from dotenv import load_dotenv
@@ -66,9 +67,11 @@ prompt = ChatPromptTemplate.from_messages([
         2. Tell me all the entries which have CostEleType as FIXED COST?
            SQL: SELECT * FROM table WHERE CostEleType = 'FIXED COST';
         3. Delete this table.
-              SQL: DROP TABLE table;
+              SQL: delete from table;
         4. Show me the entries where the OrderFmt is greater than 100.
               SQL: SELECT * FROM table WHERE OrderFmt > 100;
+        5. drop the table.
+                SQL: DROP TABLE table;
         """
     ),
     ("user", "sql query for :{user_input}")
@@ -84,6 +87,8 @@ def fetchtable(sql,table):
     if "SELECT" not in (sql).upper():
         conn.commit()
         st.success("Query executed successfully!")
+        conn.close()
+        st.rerun()
         return
     data=cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
@@ -100,11 +105,14 @@ st.write("Interact with the SQLAI model via this simple interface.")
 
 csvfile=st.file_uploader("Upload a CSV file", type=["csv"], accept_multiple_files=False)
 if csvfile:
+    ss=st.empty()
     df=pd.read_csv(csvfile)
     name=csvfile.name.split(".")[0]
     name= re.sub(r"[^\w]", "", name)
     df.to_sql(name, sqlite3.connect('test.db'), if_exists='replace', index=False)
-    st.success("File uploaded successfully!")
+    ss.success("File uploaded successfully!")
+    time.sleep(0.5)  # Wait for 3 seconds
+    ss.empty()  # Clear the placeholder after 3 seconds
     dbSchema = get_all_table_names(database_path)
 if csvfile or dbSchema:
     col1, col2 = st.columns(2)
