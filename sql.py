@@ -111,7 +111,6 @@ if csvfile:
     name= re.sub(r"[^\w]", "", name)
     df.to_sql(name, sqlite3.connect('test.db'), if_exists='replace', index=False)
     ss.success("File uploaded successfully!")
-    time.sleep(0.5)  # Wait for 3 seconds
     ss.empty()  # Clear the placeholder after 3 seconds
     dbSchema = get_all_table_names(database_path)
 if csvfile or dbSchema:
