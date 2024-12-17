@@ -65,6 +65,10 @@ prompt = ChatPromptTemplate.from_messages([
            SQL: SELECT COUNT(*) FROM table;
         2. Tell me all the entries which have CostEleType as FIXED COST?
            SQL: SELECT * FROM table WHERE CostEleType = 'FIXED COST';
+        3. Delete this table.
+              SQL: DROP TABLE table;
+        4. Show me the entries where the OrderFmt is greater than 100.
+              SQL: SELECT * FROM table WHERE OrderFmt > 100;
         """
     ),
     ("user", "sql query for :{user_input}")
