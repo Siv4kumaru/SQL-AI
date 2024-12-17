@@ -1,0 +1,5 @@
+LANGCHAIN_API_KEY="yourlangcahinkey"
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_ENDPOINT="https://api.smith.langchain.com" 
+LANGCHAIN_PROJECT="anyname"
+GROQ_API_KEY="your key and also line 3 is a cool langchain dashboard click it while the app is runnign, also copy this txt fie and put ur credentiatls and save as ".env""
