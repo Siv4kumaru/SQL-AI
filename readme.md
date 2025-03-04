@@ -38,3 +38,10 @@ Get SQLAI running locally with these steps:
    git clone https://github.com/yourusername/sqlai.git
    cd sqlai
    
+2. **Virtual Environment and dependency installation**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+
+
