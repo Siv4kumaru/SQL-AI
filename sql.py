@@ -93,7 +93,7 @@ def fetchtable(sql,table):
     data=cursor.fetchall()
     column_names = [description[0] for description in cursor.description]
     conn.close()
-    df=pd.DataFrame(data,columns=column_names)
+    df=pd.DataFrame(data,columns=column_names,encoding="utf-8", errors="ignore")
     st.write(df)
 
 output_parser=StrOutputParser()
