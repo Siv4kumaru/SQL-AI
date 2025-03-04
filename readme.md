@@ -57,8 +57,9 @@ Get SQLAI running locally with these steps:
       register to Groq dev console and langchain community
       Completely free to use apis available here
       use the angchain api and groq api keys here
+```
+5. **Running**
 
-5.**Running**
 ```bash
    python -m streamlit run app.py
 ```
