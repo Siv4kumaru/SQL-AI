@@ -111,7 +111,7 @@ csv_file = st.file_uploader("Upload a CSV file", type=["csv"], accept_multiple_f
 if csv_file:
     status = st.empty()
     try:
-        df = pd.read_csv(csv_file, encoding="utf-8", errors="ignore")
+        df = pd.read_csv(csv_file,encoding="Latin1")
         table_name = re.sub(r"[^\w]", "", csv_file.name.split(".")[0])
         df.to_sql(table_name, sqlite3.connect(DATABASE_PATH), if_exists='replace', index=False)
         status.success(f"File uploaded successfully as table '{table_name}'!")
