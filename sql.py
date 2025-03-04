@@ -106,7 +106,10 @@ st.write("Interact with the SQLAI model via this simple interface.")
 csvfile=st.file_uploader("Upload a CSV file", type=["csv"], accept_multiple_files=False)
 if csvfile:
     ss=st.empty()
-    df=pd.read_csv(csvfile)
+    try:
+        df=pd.read_csv(csvfile,encoding="utf-8")
+    except UnicodeDecodeError:
+        df = pd.read_csv(csvfile, encoding="ISO-8859-1")
     name=csvfile.name.split(".")[0]
     name= re.sub(r"[^\w]", "", name)
     df.to_sql(name, sqlite3.connect('test.db'), if_exists='replace', index=False)
