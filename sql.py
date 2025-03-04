@@ -127,7 +127,7 @@ if db_schema:
     with col1:
         with st.form("query_form"):
             selected_table = st.selectbox('Select a table', list(db_schema.keys()))
-            user_input = st.text_area('Enter your query', 
+            user_input = st.text_area('try query : show all', 
                                     placeholder="e.g., Show all entries where cost > 100")
             submit_button = st.form_submit_button("Execute Query")
             
