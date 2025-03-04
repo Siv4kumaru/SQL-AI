@@ -14,16 +14,25 @@ import sqlite3
 
 
 def get_all_table_names(database_path):
-    # Connect to the SQLite database
     conn = sqlite3.connect(database_path)
     cursor = conn.cursor()
-
-    # Query to get all table names
+    
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = {row[0]:[tablehead(row[0],database_path)] for row in cursor.fetchall()}
-
+    tables = cursor.fetchall()
+    
+    if not tables:
+        conn.close()
+        return False
+        
+    result = {}
+    for table in tables:
+        table_name = table[0]
+        cursor.execute(f"PRAGMA table_info('{table_name}');")
+        headers = [row[1] for row in cursor.fetchall()]
+        result[table_name] = headers if headers else ["Empty"]
+    
     conn.close()
-    return tables
+    return result
 
 def tablehead(table_name,database_path):
     conn=sqlite3.connect(database_path)
