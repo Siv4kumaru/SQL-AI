@@ -40,7 +40,7 @@ database_path = 'test.db'
 dbSchema = get_all_table_names(database_path)
 print("DB schema:", dbSchema)
 
-chat = ChatGroq(model_name="llama-3.2-3b-preview")
+chat = ChatGroq(model_name="deepseek-r1-distill-llama-70b")
 prompt = ChatPromptTemplate.from_messages([
     (
         "system",
